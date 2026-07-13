@@ -4,9 +4,153 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>噩盡島</title>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      color-scheme: dark;
+      --bg: #0c0c0c;
+      --panel: #181818;
+      --panel-hover: #222;
+      --line: #353535;
+      --muted: #b8b8b8;
+      --text: #ffffff;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Arial, "Microsoft JhengHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body {
+      overflow-y: auto;
+    }
+
+    .site-header {
+      padding: 64px 24px 40px;
+      text-align: center;
+      background: linear-gradient(180deg, #262626 0%, #111 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .site-header h1 {
+      margin: 0 0 12px;
+      font-size: clamp(36px, 7vw, 60px);
+      line-height: 1.1;
+    }
+
+    .site-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .chapter-list-wrap {
+      width: min(900px, calc(100% - 32px));
+      margin: 32px auto 80px;
+    }
+
+    .chapter-list-wrap h2 {
+      margin: 0 0 18px;
+      font-size: 26px;
+    }
+
+    .chapter-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .chapter-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 22px;
+      color: var(--text);
+      text-decoration: none;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .chapter-card:hover {
+      transform: translateY(-2px);
+      background: var(--panel-hover);
+    }
+
+    .chapter-number {
+      color: #d7d7d7;
+      font-size: 14px;
+    }
+
+    .chapter-card h3 {
+      margin: 6px 0;
+      font-size: 21px;
+    }
+
+    .chapter-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .chapter-arrow {
+      flex: none;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .empty-message,
+    .error-message {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      color: var(--muted);
+    }
+
+    @media (max-width: 700px) {
+      .site-header {
+        padding: 46px 18px 30px;
+      }
+
+      .site-header h1 {
+        font-size: 40px;
+      }
+
+      .chapter-list-wrap {
+        width: calc(100% - 24px);
+        margin-top: 24px;
+      }
+
+      .chapter-list-wrap h2 {
+        font-size: 23px;
+      }
+
+      .chapter-card {
+        padding: 18px;
+      }
+
+      .chapter-card h3 {
+        font-size: 19px;
+      }
+
+      .chapter-arrow {
+        display: none;
+      }
+    }
+  </style>
 </head>
-<body class="home-page">
+
+<body>
   <header class="site-header">
     <h1 id="siteTitle">噩盡島</h1>
     <p id="siteDescription">請選擇話數開始閱讀。</p>
@@ -15,31 +159,71 @@
   <main class="chapter-list-wrap">
     <section>
       <h2>話數列表</h2>
-      <div id="chapterList" class="chapter-list"></div>
+      <div id="chapterList" class="chapter-list">
+        <div class="empty-message">話數載入中……</div>
+      </div>
     </section>
   </main>
 
-  <script src="data.js"></script>
+  <script src="data.js?v=20260714-indexfix"></script>
+
   <script>
-    document.getElementById("siteTitle").textContent = comicData.siteTitle;
-    document.getElementById("siteDescription").textContent = comicData.description;
-    document.title = comicData.siteTitle;
+    window.addEventListener("load", () => {
+      const chapterList = document.getElementById("chapterList");
+      const siteTitle = document.getElementById("siteTitle");
+      const siteDescription =
+        document.getElementById("siteDescription");
 
-    const chapterList = document.getElementById("chapterList");
+      if (
+        typeof comicData === "undefined" ||
+        !Array.isArray(comicData.chapters)
+      ) {
+        chapterList.innerHTML =
+          '<div class="error-message">data.js 載入失敗，請確認檔案仍在 GitHub 最外層。</div>';
+        return;
+      }
 
-    comicData.chapters.forEach((chapter, index) => {
-      const link = document.createElement("a");
-      link.className = "chapter-card";
-      link.href = `reader.html?chapter=${index}&page=1`;
-      link.innerHTML = `
-        <div>
-          <span class="chapter-number">第 ${chapter.number} 話</span>
-          <h3>${chapter.title}</h3>
-          <p>${chapter.pages.length} 頁</p>
-        </div>
-        <span class="chapter-arrow">開始閱讀 ←</span>
-      `;
-      chapterList.appendChild(link);
+      siteTitle.textContent = comicData.siteTitle || "噩盡島";
+      siteDescription.textContent =
+        comicData.description || "請選擇話數開始閱讀。";
+      document.title = comicData.siteTitle || "噩盡島";
+
+      chapterList.innerHTML = "";
+
+      if (comicData.chapters.length === 0) {
+        chapterList.innerHTML =
+          '<div class="empty-message">目前還沒有話數。</div>';
+        return;
+      }
+
+      comicData.chapters.forEach((chapter, index) => {
+        const link = document.createElement("a");
+        link.className = "chapter-card";
+        link.href =
+          `reader.html?chapter=${index}&page=1`;
+
+        const pageCount = Array.isArray(chapter.pages)
+          ? chapter.pages.length
+          : 0;
+
+        link.innerHTML = `
+          <div>
+            <span class="chapter-number">
+              第 ${chapter.number} 話
+            </span>
+
+            <h3>${chapter.title}</h3>
+
+            <p>${pageCount} 頁</p>
+          </div>
+
+          <span class="chapter-arrow">
+            開始閱讀 ←
+          </span>
+        `;
+
+        chapterList.appendChild(link);
+      });
     });
   </script>
 </body>
