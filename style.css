@@ -243,3 +243,81 @@ button:disabled {
 
   .chapter-arrow { display: none; }
 }
+
+
+/* 手機閱讀與全螢幕改善 */
+.exit-immersive-button {
+  display: none;
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  right: 10px;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 999px;
+  padding: 9px 13px;
+  background: rgba(0,0,0,.72);
+  color: #fff;
+  font: inherit;
+}
+
+body.immersive-mode {
+  overflow: auto;
+}
+
+body.immersive-mode .reader-header,
+body.immersive-mode .reader-footer {
+  display: none !important;
+}
+
+body.immersive-mode .reader-main {
+  width: 100%;
+  height: auto;
+  min-height: 100dvh;
+  padding: 0 !important;
+}
+
+body.immersive-mode .image-stage {
+  width: 100%;
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+  align-items: flex-start;
+}
+
+body.immersive-mode #comicImage {
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+body.immersive-mode .exit-immersive-button {
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .reader-page {
+    overflow: auto;
+  }
+
+  .reader-main {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .image-stage {
+    height: auto;
+    min-height: calc(100dvh - 243px);
+    overflow-x: auto;
+    overflow-y: visible;
+    align-items: flex-start;
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+
+  #comicImage {
+    width: 100vw;
+    max-width: none;
+    height: auto;
+    object-fit: initial;
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+}

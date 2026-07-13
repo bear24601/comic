@@ -31,6 +31,7 @@ const pageSelectBottom = document.getElementById("pageSelectBottom");
 const previousChapterButton = document.getElementById("previousChapterButton");
 const nextChapterButton = document.getElementById("nextChapterButton");
 const fullscreenButton = document.getElementById("fullscreenButton");
+const exitImmersiveButton = document.getElementById("exitImmersiveButton");
 
 chapterTitle.textContent = `第 ${chapter.number} 話｜${chapter.title}`;
 document.title = `${chapter.title}｜${comicData.siteTitle}`;
@@ -198,16 +199,47 @@ comicImage.addEventListener("touchend", event => {
   }
 }, { passive: true });
 
+function enterImmersiveMode() {
+  document.body.classList.add("immersive-mode");
+  fullscreenButton.textContent = "退出全螢幕";
+  window.scrollTo(0, 0);
+}
+
+function exitImmersiveMode() {
+  document.body.classList.remove("immersive-mode");
+  fullscreenButton.textContent = "全螢幕";
+  window.scrollTo(0, 0);
+}
+
 fullscreenButton.addEventListener("click", async () => {
+  if (document.body.classList.contains("immersive-mode")) {
+    exitImmersiveMode();
+    return;
+  }
+
+  if (document.fullscreenElement) {
+    await document.exitFullscreen();
+    return;
+  }
+
   try {
-    if (!document.fullscreenElement) {
+    if (document.documentElement.requestFullscreen) {
       await document.documentElement.requestFullscreen();
     } else {
-      await document.exitFullscreen();
+      enterImmersiveMode();
     }
   } catch (error) {
-    console.warn("此瀏覽器不支援全螢幕模式。", error);
+    console.warn("瀏覽器不支援真正全螢幕，改用沉浸模式。", error);
+    enterImmersiveMode();
   }
+});
+
+exitImmersiveButton.addEventListener("click", () => {
+  exitImmersiveMode();
+});
+
+document.addEventListener("fullscreenchange", () => {
+  fullscreenButton.textContent = document.fullscreenElement ? "退出全螢幕" : "全螢幕";
 });
 
 showPage();
