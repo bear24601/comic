@@ -1,0 +1,245 @@
+* { box-sizing: border-box; }
+
+:root {
+  color-scheme: dark;
+  --panel: rgba(20, 20, 20, 0.96);
+  --muted: #b8b8b8;
+  --line: #353535;
+  --card: #181818;
+  --card-hover: #222;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, "Microsoft JhengHei", sans-serif;
+}
+
+body {
+  background: #0c0c0c;
+  color: #fff;
+}
+
+a { color: inherit; }
+
+.site-header {
+  padding: 64px 24px 40px;
+  text-align: center;
+  background: linear-gradient(180deg, #262626 0%, #111 100%);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header h1 {
+  margin: 0 0 12px;
+  font-size: clamp(32px, 7vw, 56px);
+}
+
+.chapter-list-wrap {
+  width: min(900px, calc(100% - 32px));
+  margin: 32px auto 80px;
+}
+
+.chapter-list {
+  display: grid;
+  gap: 14px;
+}
+
+.chapter-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px;
+  text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.chapter-card:hover { background: var(--card-hover); }
+.chapter-card h3 { margin: 6px 0; }
+.chapter-card p { margin: 0; color: var(--muted); }
+.chapter-number { color: #d7d7d7; font-size: 14px; }
+
+.reader-page { overflow: hidden; }
+
+.reader-header,
+.reader-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+}
+
+.reader-header {
+  top: 0;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.reader-footer {
+  bottom: 0;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 1px solid var(--line);
+}
+
+.footer-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.reader-left-actions,
+.reader-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reader-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.reader-title strong,
+.reader-title span {
+  overflow: hidden;
+  max-width: 44vw;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reader-title span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.control-link,
+.control-button,
+.reader-footer button,
+.reader-footer select,
+.page-select {
+  border: 1px solid #4a4a4a;
+  border-radius: 9px;
+  padding: 9px 12px;
+  background: #242424;
+  color: white;
+  text-decoration: none;
+  font: inherit;
+}
+
+.control-button,
+.reader-footer button {
+  cursor: pointer;
+}
+
+.page-nav-button {
+  min-width: 96px;
+  font-weight: 700;
+}
+
+.primary-next {
+  background: #efefef !important;
+  color: #111 !important;
+  border-color: #efefef !important;
+}
+
+button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.reader-main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 58px 0 122px;
+}
+
+.image-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  cursor: pointer;
+}
+
+#comicImage {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.loading-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--muted);
+  text-align: center;
+  padding: 16px;
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .reader-header {
+    flex-wrap: wrap;
+    padding: 8px;
+  }
+
+  .reader-title {
+    order: -1;
+    width: 100%;
+  }
+
+  .reader-left-actions,
+  .reader-right-actions {
+    flex: 1;
+  }
+
+  .reader-right-actions {
+    justify-content: flex-end;
+  }
+
+  .control-link,
+  .control-button,
+  .reader-footer button,
+  .reader-footer select,
+  .page-select {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .page-select {
+    max-width: 108px;
+  }
+
+  .page-nav-button {
+    min-width: 92px;
+    font-size: 14px !important;
+  }
+
+  .reader-main {
+    padding-top: 91px;
+    padding-bottom: 152px;
+  }
+
+  .chapter-arrow { display: none; }
+}

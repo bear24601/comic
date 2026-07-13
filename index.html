@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>噩盡島</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+  <header class="site-header">
+    <h1 id="siteTitle">噩盡島</h1>
+    <p id="siteDescription">請選擇話數開始閱讀。</p>
+  </header>
+
+  <main class="chapter-list-wrap">
+    <section>
+      <h2>話數列表</h2>
+      <div id="chapterList" class="chapter-list"></div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script>
+    document.getElementById("siteTitle").textContent = comicData.siteTitle;
+    document.getElementById("siteDescription").textContent = comicData.description;
+    document.title = comicData.siteTitle;
+
+    const chapterList = document.getElementById("chapterList");
+
+    comicData.chapters.forEach((chapter, index) => {
+      const link = document.createElement("a");
+      link.className = "chapter-card";
+      link.href = `reader.html?chapter=${index}&page=1`;
+      link.innerHTML = `
+        <div>
+          <span class="chapter-number">第 ${chapter.number} 話</span>
+          <h3>${chapter.title}</h3>
+          <p>${chapter.pages.length} 頁</p>
+        </div>
+        <span class="chapter-arrow">開始閱讀 ←</span>
+      `;
+      chapterList.appendChild(link);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>漫畫閱讀器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="reader-page">
+  <header class="reader-header">
+    <div class="reader-left-actions">
+      <a class="control-link" href="index.html">目錄</a>
+      <button id="firstPageButton" class="control-button" type="button">第一頁</button>
+    </div>
+
+    <div class="reader-title">
+      <strong id="chapterTitle">讀取中</strong>
+      <span id="pageCounter">第 1／1 頁</span>
+    </div>
+
+    <div class="reader-right-actions">
+      <select id="pageSelectTop" class="page-select" aria-label="選擇頁數"></select>
+      <button id="fullscreenButton" class="control-button" type="button">全螢幕</button>
+    </div>
+  </header>
+
+  <main class="reader-main">
+    <div class="image-stage" id="imageStage">
+      <img id="comicImage" alt="漫畫頁面">
+      <div id="loadingText" class="loading-text">圖片讀取中……</div>
+    </div>
+  </main>
+
+  <footer class="reader-footer">
+    <div class="footer-row footer-row-pages">
+      <button id="nextPageButton" class="page-nav-button primary-next" type="button">下一頁</button>
+      <select id="pageSelectBottom" class="page-select" aria-label="選擇頁數"></select>
+      <button id="previousPageButton" class="page-nav-button" type="button">上一頁</button>
+    </div>
+
+    <div class="footer-row footer-row-chapters">
+      <button id="previousChapterButton" type="button">上一話</button>
+      <select id="chapterSelect" aria-label="選擇話數"></select>
+      <button id="nextChapterButton" type="button">下一話</button>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
