@@ -76,9 +76,7 @@
       color: var(--text);
     }
 
-    .chapter-card:hover {
-      background: var(--panel-hover);
-    }
+    .chapter-card:hover { background: var(--panel-hover); }
 
     .cover-box {
       width: 220px;
@@ -161,21 +159,103 @@
       color: var(--muted);
     }
 
+    /* 手機版維持橫條，不再放大成整張卡片 */
     @media (max-width: 860px) {
-      .chapter-card { grid-template-columns: 1fr; }
-      .cover-box { width: 100%; }
-      .chapter-actions { min-width: 0; width: 100%; }
+      .site-header {
+        padding: 38px 16px 26px;
+      }
+
+      .site-header h1 {
+        font-size: 38px;
+      }
+
+      .chapter-list-wrap {
+        width: calc(100% - 20px);
+        margin: 22px auto 60px;
+      }
+
+      .chapter-list-wrap h2 {
+        font-size: 24px;
+        margin-bottom: 14px;
+      }
+
+      .chapter-list {
+        gap: 10px;
+      }
+
+      .chapter-card {
+        grid-template-columns: 122px minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 14px;
+      }
+
+      .cover-box {
+        width: 122px;
+        aspect-ratio: 5 / 3;
+        border-radius: 10px;
+      }
+
+      .chapter-number {
+        font-size: 12px;
+      }
+
+      .chapter-title {
+        margin: 3px 0 5px;
+        font-size: 17px;
+      }
+
+      .chapter-sub {
+        font-size: 13px;
+      }
+
+      .progress-text {
+        margin-top: 3px;
+        font-size: 12px;
+      }
+
+      .chapter-actions {
+        min-width: 74px;
+        gap: 7px;
+      }
+
+      .read-button,
+      .restart-button {
+        padding: 9px 10px;
+        font-size: 13px;
+      }
+
+      .restart-button {
+        display: none;
+      }
     }
 
-    @media (max-width: 700px) {
-      .site-header { padding: 46px 18px 30px; }
-      .site-header h1 { font-size: 40px; }
-      .chapter-list-wrap {
-        width: calc(100% - 24px);
-        margin-top: 24px;
+    @media (max-width: 430px) {
+      .chapter-card {
+        grid-template-columns: 110px minmax(0, 1fr) 68px;
+        gap: 10px;
+        padding: 10px;
       }
-      .chapter-card { padding: 14px; }
-      .chapter-title { font-size: 20px; }
+
+      .cover-box {
+        width: 110px;
+      }
+
+      .chapter-title {
+        font-size: 16px;
+      }
+
+      .progress-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .read-button {
+        white-space: normal;
+        line-height: 1.25;
+        padding: 8px 7px;
+      }
     }
   </style>
 </head>
@@ -195,7 +275,7 @@
     </section>
   </main>
 
-  <script src="data.js?v=20260715-coverfix3"></script>
+  <script src="data.js?v=20260715-mobile-row-fix"></script>
   <script>
     window.addEventListener("load", () => {
       const chapterList = document.getElementById("chapterList");
@@ -231,10 +311,10 @@
         card.innerHTML = `
           <div class="cover-box">
             ${coverPath
-              ? `<img src="${coverPath}?v=20260715-coverfix3"
+              ? `<img src="${coverPath}?v=20260715-mobile-row-fix"
                       alt="第 ${chapter.number} 話封面"
                       loading="lazy"
-                      onerror="this.onerror=null;this.src='${pages[0] || ""}?v=20260715-coverfix3';">`
+                      onerror="this.onerror=null;this.src='${pages[0] || ""}?v=20260715-mobile-row-fix';">`
               : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#888;">無封面</div>`}
           </div>
 
@@ -242,13 +322,13 @@
             <div class="chapter-number">第 ${chapter.number} 話</div>
             <div class="chapter-title">${chapter.title || ""}</div>
             <div class="chapter-sub">${pageCount} 頁</div>
-            <div class="progress-text">已記錄進度：第 ${Math.min(currentPage + 1, Math.max(pageCount, 1))}／${pageCount} 頁</div>
+            <div class="progress-text">進度：第 ${Math.min(currentPage + 1, Math.max(pageCount, 1))}／${pageCount} 頁</div>
           </div>
 
           <div class="chapter-actions">
             <a class="read-button"
                href="reader.html?chapter=${index}&page=${Math.min(currentPage + 1, Math.max(pageCount, 1))}">
-              ${currentPage > 0 ? `繼續閱讀（第 ${currentPage + 1} 頁）` : "開始閱讀"}
+              ${currentPage > 0 ? "繼續閱讀" : "閱讀"}
             </a>
             <a class="restart-button"
                href="reader.html?chapter=${index}&page=1">
