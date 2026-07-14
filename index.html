@@ -159,7 +159,6 @@
       color: var(--muted);
     }
 
-    /* 手機版維持橫條，不再放大成整張卡片 */
     @media (max-width: 860px) {
       .site-header {
         padding: 38px 16px 26px;
@@ -184,7 +183,7 @@
       }
 
       .chapter-card {
-        grid-template-columns: 122px minmax(0, 1fr) auto;
+        grid-template-columns: 122px minmax(0, 1fr) 96px;
         gap: 12px;
         padding: 12px;
         border-radius: 14px;
@@ -215,46 +214,54 @@
       }
 
       .chapter-actions {
-        min-width: 74px;
+        min-width: 0;
+        width: 96px;
         gap: 7px;
       }
 
       .read-button,
       .restart-button {
-        padding: 9px 10px;
-        font-size: 13px;
-      }
-
-      .restart-button {
-        display: none;
+        padding: 9px 7px;
+        font-size: 12px;
+        white-space: normal;
+        line-height: 1.2;
       }
     }
 
     @media (max-width: 430px) {
       .chapter-card {
-        grid-template-columns: 110px minmax(0, 1fr) 68px;
-        gap: 10px;
+        grid-template-columns: 104px minmax(0, 1fr) 88px;
+        gap: 9px;
         padding: 10px;
       }
 
       .cover-box {
-        width: 110px;
+        width: 104px;
       }
 
       .chapter-title {
-        font-size: 16px;
+        font-size: 15px;
+      }
+
+      .chapter-sub {
+        font-size: 12px;
       }
 
       .progress-text {
+        font-size: 11px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      .read-button {
-        white-space: normal;
-        line-height: 1.25;
-        padding: 8px 7px;
+      .chapter-actions {
+        width: 88px;
+      }
+
+      .read-button,
+      .restart-button {
+        padding: 8px 6px;
+        font-size: 11px;
       }
     }
   </style>
@@ -275,7 +282,7 @@
     </section>
   </main>
 
-  <script src="data.js?v=20260715-mobile-row-fix"></script>
+  <script src="data.js?v=20260715-mobile-two-buttons"></script>
   <script>
     window.addEventListener("load", () => {
       const chapterList = document.getElementById("chapterList");
@@ -311,10 +318,10 @@
         card.innerHTML = `
           <div class="cover-box">
             ${coverPath
-              ? `<img src="${coverPath}?v=20260715-mobile-row-fix"
+              ? `<img src="${coverPath}?v=20260715-mobile-two-buttons"
                       alt="第 ${chapter.number} 話封面"
                       loading="lazy"
-                      onerror="this.onerror=null;this.src='${pages[0] || ""}?v=20260715-mobile-row-fix';">`
+                      onerror="this.onerror=null;this.src='${pages[0] || ""}?v=20260715-mobile-two-buttons';">`
               : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#888;">無封面</div>`}
           </div>
 
@@ -330,9 +337,10 @@
                href="reader.html?chapter=${index}&page=${Math.min(currentPage + 1, Math.max(pageCount, 1))}">
               ${currentPage > 0 ? "繼續閱讀" : "閱讀"}
             </a>
+
             <a class="restart-button"
                href="reader.html?chapter=${index}&page=1">
-              從第一頁開始
+              從第一頁
             </a>
           </div>
         `;
