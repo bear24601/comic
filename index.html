@@ -7,6 +7,7 @@
 
   <style>
     * { box-sizing: border-box; }
+
     :root {
       color-scheme: dark;
       --bg: #0c0c0c;
@@ -73,12 +74,9 @@
       border: 1px solid var(--line);
       border-radius: 18px;
       color: var(--text);
-      text-decoration: none;
-      transition: transform 0.18s ease, background 0.18s ease;
     }
 
     .chapter-card:hover {
-      transform: translateY(-2px);
       background: var(--panel-hover);
     }
 
@@ -127,7 +125,6 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      align-items: stretch;
       min-width: 130px;
     }
 
@@ -171,19 +168,14 @@
     }
 
     @media (max-width: 700px) {
-      .site-header {
-        padding: 46px 18px 30px;
-      }
+      .site-header { padding: 46px 18px 30px; }
       .site-header h1 { font-size: 40px; }
       .chapter-list-wrap {
         width: calc(100% - 24px);
         margin-top: 24px;
       }
-      .chapter-list-wrap h2 { font-size: 23px; }
       .chapter-card { padding: 14px; }
       .chapter-title { font-size: 20px; }
-      .chapter-sub, .progress-text { font-size: 14px; }
-      .read-button, .restart-button { padding: 11px 14px; }
     }
   </style>
 </head>
@@ -203,7 +195,7 @@
     </section>
   </main>
 
-  <script src="data.js?v=coverlist1"></script>
+  <script src="data.js?v=20260715-coverfix3"></script>
   <script>
     window.addEventListener("load", () => {
       const chapterList = document.getElementById("chapterList");
@@ -219,20 +211,12 @@
       siteTitle.textContent = comicData.siteTitle || "噩盡島";
       siteDescription.textContent = comicData.description || "請選擇話數開始閱讀。";
       document.title = comicData.siteTitle || "噩盡島";
-
       chapterList.innerHTML = "";
-
-      if (comicData.chapters.length === 0) {
-        chapterList.innerHTML =
-          '<div class="empty-message">目前還沒有話數。</div>';
-        return;
-      }
 
       comicData.chapters.forEach((chapter, index) => {
         const pages = Array.isArray(chapter.pages) ? chapter.pages : [];
         const pageCount = pages.length;
-        const fallbackCover = pageCount > 0 ? pages[0] : "";
-        const coverPath = chapter.cover || fallbackCover;
+        const coverPath = chapter.cover || (pageCount > 0 ? pages[0] : "");
 
         const progressKey = `comic-progress-${index}`;
         const savedPage = Number(localStorage.getItem(progressKey) || 0);
@@ -241,40 +225,33 @@
             ? savedPage
             : 0;
 
-        const readLabel =
-          currentPage > 0 ? `繼續閱讀（第 ${currentPage + 1} 頁）` : "開始閱讀";
-
         const card = document.createElement("article");
         card.className = "chapter-card";
-
-        const safeTitle = chapter.title || "";
-        const safeNumber = chapter.number ?? index + 1;
-        const safeDate = chapter.date ? `｜${chapter.date}` : "";
-        const safeSummary = chapter.summary ? `<div>${chapter.summary}</div>` : "";
-        const safeProgress = pageCount > 0
-          ? `<div class="progress-text">已記錄進度：第 ${currentPage + 1}／${pageCount} 頁</div>`
-          : `<div class="progress-text">尚未加入頁面</div>`;
 
         card.innerHTML = `
           <div class="cover-box">
             ${coverPath
-              ? `<img src="${coverPath}" alt="第 ${safeNumber} 話封面" loading="lazy">`
+              ? `<img src="${coverPath}?v=20260715-coverfix3"
+                      alt="第 ${chapter.number} 話封面"
+                      loading="lazy"
+                      onerror="this.onerror=null;this.src='${pages[0] || ""}?v=20260715-coverfix3';">`
               : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#888;">無封面</div>`}
           </div>
 
           <div class="chapter-meta">
-            <div class="chapter-number">第 ${safeNumber} 話</div>
-            <div class="chapter-title">${safeTitle}</div>
-            <div class="chapter-sub">${pageCount} 頁 ${safeDate}</div>
-            ${safeSummary}
-            ${safeProgress}
+            <div class="chapter-number">第 ${chapter.number} 話</div>
+            <div class="chapter-title">${chapter.title || ""}</div>
+            <div class="chapter-sub">${pageCount} 頁</div>
+            <div class="progress-text">已記錄進度：第 ${Math.min(currentPage + 1, Math.max(pageCount, 1))}／${pageCount} 頁</div>
           </div>
 
           <div class="chapter-actions">
-            <a class="read-button" href="reader.html?chapter=${index}&page=${Math.min(currentPage + 1, Math.max(pageCount, 1))}">
-              ${readLabel}
+            <a class="read-button"
+               href="reader.html?chapter=${index}&page=${Math.min(currentPage + 1, Math.max(pageCount, 1))}">
+              ${currentPage > 0 ? `繼續閱讀（第 ${currentPage + 1} 頁）` : "開始閱讀"}
             </a>
-            <a class="restart-button" href="reader.html?chapter=${index}&page=1">
+            <a class="restart-button"
+               href="reader.html?chapter=${index}&page=1">
               從第一頁開始
             </a>
           </div>
