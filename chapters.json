@@ -1,0 +1,51 @@
+{
+  "siteTitle": "噩盡島",
+  "description": "請選擇話數開始閱讀。",
+  "chapters": [
+    {
+      "number": 17,
+      "title": "都是息壤不好",
+      "cover": "images/covers/chapter17.jpg"
+    },
+    {
+      "number": 18,
+      "title": "你們先回去睡覺",
+      "cover": "images/covers/chapter18.jpg"
+    },
+    {
+      "number": 19,
+      "title": "你都不會吃醋啊？",
+      "cover": "images/covers/chapter19.jpg"
+    },
+    {
+      "number": 20,
+      "title": "臭小子，快跑！",
+      "cover": "images/covers/chapter20.jpg"
+    },
+    {
+      "number": 21,
+      "title": "說不過這丫頭",
+      "cover": "images/covers/chapter21.jpg"
+    },
+    {
+      "number": 22,
+      "title": "化妝術好神奇",
+      "cover": "images/covers/chapter22.jpg"
+    },
+    {
+      "number": 23,
+      "title": "最差的一種",
+      "cover": "images/covers/chapter23.jpg"
+    },
+    {
+      "number": 24,
+      "title": "有沒有臭臭的？",
+      "cover": "images/covers/chapter24.jpg"
+    },
+    {
+      "number": 25,
+      "title": "輸給你這丫頭",
+      "cover": "images/covers/chapter25.jpg"
+    }
+  ]
+}

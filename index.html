@@ -100,9 +100,10 @@
     .topline {
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 8px;
+      flex-wrap: nowrap;
       margin-bottom: 6px;
+      min-width: 0;
     }
 
     .chapter-no {
@@ -222,6 +223,31 @@
     }
 
     @media (max-width: 900px) {
+      .topline {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: nowrap;
+        margin-bottom: 4px;
+        width: 100%;
+        overflow: visible;
+      }
+
+      .chapter-no {
+        flex: 0 1 auto;
+        white-space: nowrap;
+      }
+
+      .badge-new {
+        flex: 0 0 auto;
+        min-width: 42px;
+        height: 20px;
+        padding: 0 7px;
+        font-size: 10px;
+        letter-spacing: .6px;
+        transform-origin: center;
+      }
+
       .wrap { width: calc(100% - 18px); margin-top: 20px; }
       .section-title { margin-bottom: 14px; }
       .card {
@@ -264,6 +290,14 @@
     }
 
     @media (max-width: 480px) {
+      .topline { gap: 5px; }
+      .badge-new {
+        min-width: 39px;
+        height: 19px;
+        padding: 0 6px;
+        font-size: 9px;
+      }
+
       .hero { padding: 34px 16px 24px; }
       .hero h1 { font-size: 34px; }
       .hero p { font-size: 14px; }
@@ -294,7 +328,7 @@
     </div>
   </main>
 
-  <script src="data.js?v=20260720-ch25-39"></script>
+  <script src="data.js?v=20260720-latest-new-auto"></script>
   <script>
     window.addEventListener('load', () => {
       const chapterList = document.getElementById('chapterList');
@@ -324,10 +358,10 @@
         const currentPage = Number.isInteger(savedPage) && savedPage >= 0 && savedPage < pageCount ? savedPage : 0;
         const displayPage = Math.min(currentPage + 1, Math.max(pageCount, 1));
         const coverPath = chapter.cover || (pageCount > 0 ? pages[0] : '');
-        const isNew = chapter.isNew === true || Number(chapter.number) === latestChapterNumber;
+        const isNew = Number(chapter.number) === latestChapterNumber;
 
         const coverHTML = coverPath
-          ? `<img src="${coverPath}?v=20260720-ch25-smalltype-final" alt="第 ${chapter.number} 話封面" loading="lazy" onerror="this.onerror=null;this.src='${pages[0] || ''}?v=20260720-ch25-smalltype-final';">`
+          ? `<img src="${coverPath}?v=20260720-latest-new-auto" alt="第 ${chapter.number} 話封面" loading="lazy" onerror="this.onerror=null;this.src='${pages[0] || ''}?v=20260720-latest-new-auto';">`
           : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#888;">無封面</div>`;
 
         const card = document.createElement('article');
