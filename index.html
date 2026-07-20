@@ -28,55 +28,52 @@
     }
 
     .hero {
-      padding: 46px 20px 30px;
+      position: relative;
+      padding: 20px 16px;
       text-align: center;
-      background: linear-gradient(180deg, #202126 0%, #111216 100%);
+      background: #111216;
       border-bottom: 1px solid var(--line);
     }
 
     .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.34) 100%);
-      pointer-events: none;
+      display: none !important;
+      content: none !important;
     }
 
     .hero h1 {
-      position: relative;
-      z-index: 1;
-      margin: 0 0 14px;
-      font-size: clamp(44px, 6vw, 72px);
-      line-height: 1.05;
-      letter-spacing: 2px;
-      color: #fff;
-      text-shadow: 0 3px 12px rgba(0,0,0,.85), 0 0 28px rgba(0,0,0,.55);
-    }
-
-    .hero p {
-      position: relative;
-      z-index: 1;
       margin: 0;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.1;
+      letter-spacing: 1px;
       color: #fff;
-      font-size: clamp(16px, 2vw, 20px);
-      font-weight: 700;
-      text-shadow: 0 2px 10px rgba(0,0,0,.95);
+      text-shadow: none;
     }
 
+    .hero p,
+    #siteDescription {
+      display: none !important;
+    }
 
     .site-banner-wrap {
       width: 100%;
+      padding: 0;
+      margin: 0;
       background: #090909;
       border-bottom: 1px solid var(--line);
       overflow: hidden;
     }
 
     .site-banner {
-      width: 100%;
-      max-height: 520px;
       display: block;
-      object-fit: cover;
+      width: min(100%, 1200px);
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
       object-position: center;
+      border-radius: 0;
+      opacity: 1;
+      filter: none;
+      mix-blend-mode: normal;
     }
 
     .wrap {
@@ -279,14 +276,6 @@
         letter-spacing: .6px;
         transform-origin: center;
       }
-
-
-      .site-banner {
-        height: 220px;
-        max-height: none;
-        object-fit: cover;
-        object-position: center;
-      }
       .wrap { width: calc(100% - 18px); margin-top: 20px; }
       .section-title { margin-bottom: 14px; }
       .card {
@@ -329,25 +318,32 @@
     }
 
     @media (max-width: 480px) {
+      .hero {
+        padding: 14px 12px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .site-banner-wrap {
+        padding: 0;
+      }
+
+      .site-banner {
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto;
+        object-fit: contain;
+        border-radius: 0;
+      }
+
       .topline { gap: 5px; }
       .badge-new {
         min-width: 39px;
         height: 19px;
         padding: 0 6px;
         font-size: 9px;
-      }
-
-      .hero {
-        min-height: 280px;
-        padding: 44px 16px 30px;
-        background-position: center center;
-      }
-      .hero h1 { font-size: 38px; }
-      .hero p { font-size: 14px; }
-      .card {
-        grid-template-columns: 112px minmax(0,1fr) 88px;
-        gap: 10px;
-        padding: 10px;
       }
       .cover { width: 112px; }
       .chapter-no { font-size: 15px; }
@@ -361,11 +357,10 @@
 <body>
   <header class="hero">
     <h1 id="siteTitle">噩盡島</h1>
-    <p id="siteDescription">請選擇話數開始閱讀。</p>
   </header>
 
   <div class="site-banner-wrap">
-    <img class="site-banner" src="images/site-banner.jpg?v=20260721-banner-below-title" alt="噩盡島首頁主視覺">
+    <img class="site-banner" src="images/site-banner.jpg?v=20260721-banner-layout-final" alt="噩盡島首頁主視覺">
   </div>
 
   <main class="wrap">
@@ -375,12 +370,11 @@
     </div>
   </main>
 
-  <script src="data.js?v=20260721-banner-below-title"></script>
+  <script src="data.js?v=20260721-banner-layout-final"></script>
   <script>
     window.addEventListener('load', () => {
       const chapterList = document.getElementById('chapterList');
       const siteTitle = document.getElementById('siteTitle');
-      const siteDescription = document.getElementById('siteDescription');
 
       if (typeof comicData === 'undefined' || !Array.isArray(comicData.chapters)) {
         chapterList.innerHTML = '<div class="error">data.js 載入失敗，請確認 data.js 在 GitHub 最外層，且內容正確。</div>';
@@ -388,7 +382,6 @@
       }
 
       siteTitle.textContent = comicData.siteTitle || '噩盡島';
-      siteDescription.textContent = comicData.description || '請選擇話數開始閱讀。';
       document.title = comicData.siteTitle || '噩盡島';
       chapterList.innerHTML = '';
 
@@ -408,7 +401,7 @@
         const isNew = Number(chapter.number) === latestChapterNumber;
 
         const coverHTML = coverPath
-          ? `<img src="${coverPath}?v=20260720-latest-new-auto" alt="第 ${chapter.number} 話封面" loading="lazy" onerror="this.onerror=null;this.src='${pages[0] || ''}?v=20260720-latest-new-auto';">`
+          ? `<img src="${coverPath}?v=20260721-banner-layout-final" alt="第 ${chapter.number} 話封面" loading="lazy" onerror="this.onerror=null;this.src='${pages[0] || ''}?v=20260721-banner-layout-final';">`
           : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#888;">無封面</div>`;
 
         const card = document.createElement('article');
