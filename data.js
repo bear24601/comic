@@ -512,7 +512,9 @@ const comicData = {
         "images/chapter25/036.jpg",
         "images/chapter25/037.jpg",
         "images/chapter25/038.jpg",
-        "images/chapter25/039.jpg"
+        "images/chapter25/039.jpg",
+        "images/chapter25/040.jpg",
+        "images/chapter25/041.jpg"
       ]
     }
   ]
