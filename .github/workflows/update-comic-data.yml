@@ -1,0 +1,44 @@
+name: 自動更新漫畫頁數
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "images/**"
+      - "chapters.json"
+      - "build_data.py"
+      - ".github/workflows/update-comic-data.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 下載網站檔案
+        uses: actions/checkout@v4
+
+      - name: 設定 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: 掃描每話圖片並產生 data.js
+        run: python build_data.py
+
+      - name: 提交自動更新結果
+        run: |
+          if git diff --quiet -- data.js; then
+            echo "頁數沒有變化，不需要提交。"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.js
+          git commit -m "自動更新漫畫頁數"
+          git push
