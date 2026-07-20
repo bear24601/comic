@@ -1,12 +1,12 @@
 const comicData = {
-  siteTitle: "噩盡島",
-  description: "請選擇話數開始閱讀。",
-  chapters: [
+  "siteTitle": "噩盡島",
+  "description": "請選擇話數開始閱讀。",
+  "chapters": [
     {
-      number: 17,
-      title: "都是息壤不好",
-      cover: "images/covers/chapter17.jpg",
-      pages: [
+      "number": 17,
+      "title": "都是息壤不好",
+      "cover": "images/covers/chapter17.jpg",
+      "pages": [
         "images/chapter17/001.jpg",
         "images/chapter17/002.jpg",
         "images/chapter17/003.jpg",
@@ -60,10 +60,10 @@ const comicData = {
       ]
     },
     {
-      number: 18,
-      title: "你們先回去睡覺",
-      cover: "images/covers/chapter18.jpg",
-      pages: [
+      "number": 18,
+      "title": "你們先回去睡覺",
+      "cover": "images/covers/chapter18.jpg",
+      "pages": [
         "images/chapter18/001.jpg",
         "images/chapter18/002.jpg",
         "images/chapter18/003.jpg",
@@ -120,10 +120,10 @@ const comicData = {
       ]
     },
     {
-      number: 19,
-      title: "你都不會吃醋啊？",
-      cover: "images/covers/chapter19.jpg",
-      pages: [
+      "number": 19,
+      "title": "你都不會吃醋啊？",
+      "cover": "images/covers/chapter19.jpg",
+      "pages": [
         "images/chapter19/001.jpg",
         "images/chapter19/002.jpg",
         "images/chapter19/003.jpg",
@@ -185,10 +185,10 @@ const comicData = {
       ]
     },
     {
-      number: 20,
-      title: "臭小子，快跑！",
-      cover: "images/covers/chapter20.jpg",
-      pages: [
+      "number": 20,
+      "title": "臭小子，快跑！",
+      "cover": "images/covers/chapter20.jpg",
+      "pages": [
         "images/chapter20/001.jpg",
         "images/chapter20/002.jpg",
         "images/chapter20/003.jpg",
@@ -242,10 +242,10 @@ const comicData = {
       ]
     },
     {
-      number: 21,
-      title: "說不過這丫頭",
-      cover: "images/covers/chapter21.jpg",
-      pages: [
+      "number": 21,
+      "title": "說不過這丫頭",
+      "cover": "images/covers/chapter21.jpg",
+      "pages": [
         "images/chapter21/001.jpg",
         "images/chapter21/002.jpg",
         "images/chapter21/003.jpg",
@@ -305,10 +305,10 @@ const comicData = {
       ]
     },
     {
-      number: 22,
-      title: "化妝術好神奇",
-      cover: "images/covers/chapter22.jpg",
-      pages: [
+      "number": 22,
+      "title": "化妝術好神奇",
+      "cover": "images/covers/chapter22.jpg",
+      "pages": [
         "images/chapter22/001.jpg",
         "images/chapter22/002.jpg",
         "images/chapter22/003.jpg",
@@ -369,10 +369,10 @@ const comicData = {
       ]
     },
     {
-      number: 23,
-      title: "最差的一種",
-      cover: "images/covers/chapter23.jpg",
-      pages: [
+      "number": 23,
+      "title": "最差的一種",
+      "cover": "images/covers/chapter23.jpg",
+      "pages": [
         "images/chapter23/001.jpg",
         "images/chapter23/002.jpg",
         "images/chapter23/003.jpg",
@@ -415,10 +415,10 @@ const comicData = {
       ]
     },
     {
-      number: 24,
-      title: "有沒有臭臭的？",
-      cover: "images/covers/chapter24.jpg",
-      pages: [
+      "number": 24,
+      "title": "有沒有臭臭的？",
+      "cover": "images/covers/chapter24.jpg",
+      "pages": [
         "images/chapter24/001.jpg",
         "images/chapter24/002.jpg",
         "images/chapter24/003.jpg",
@@ -468,13 +468,12 @@ const comicData = {
         "images/chapter24/047.jpg",
         "images/chapter24/048.jpg"
       ]
-    }
-    ,
+    },
     {
-      number: 25,
-      title: "輸給你這丫頭",
-      cover: "images/covers/chapter25.jpg",
-      pages: [
+      "number": 25,
+      "title": "輸給你這丫頭",
+      "cover": "images/covers/chapter25.jpg",
+      "pages": [
         "images/chapter25/001.jpg",
         "images/chapter25/002.jpg",
         "images/chapter25/003.jpg",
