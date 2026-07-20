@@ -319,11 +319,11 @@
 
     @media (max-width: 480px) {
       .hero {
-        padding: 14px 12px;
+        padding: 12px 10px;
       }
 
       .hero h1 {
-        font-size: 28px;
+        font-size: 26px;
       }
 
       .site-banner-wrap {
@@ -338,19 +338,98 @@
         border-radius: 0;
       }
 
-      .topline { gap: 5px; }
-      .badge-new {
-        min-width: 39px;
-        height: 19px;
-        padding: 0 6px;
-        font-size: 9px;
+      .wrap {
+        width: calc(100% - 12px);
+        margin-top: 14px;
       }
-      .cover { width: 112px; }
-      .chapter-no { font-size: 15px; }
-      .title { font-size: 15px; }
-      .stats { font-size: 12px; gap: 6px 10px; }
-      .actions { width: 88px; }
-      .btn { min-height: 38px; font-size: 12px; padding: 7px 6px; }
+
+      .section-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+      }
+
+      .list {
+        gap: 10px;
+      }
+
+      .card {
+        grid-template-columns: 104px minmax(0, 1fr) 88px;
+        grid-template-areas: "cover meta actions";
+        align-items: center;
+        gap: 9px;
+        padding: 9px;
+        border-radius: 15px;
+      }
+
+      .cover {
+        grid-area: cover;
+        width: 104px;
+        border-radius: 10px;
+      }
+
+      .meta {
+        grid-area: meta;
+        min-width: 0;
+        align-self: center;
+      }
+
+      .topline {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex-wrap: nowrap;
+        margin-bottom: 4px;
+        min-width: 0;
+      }
+
+      .chapter-no {
+        font-size: 14px;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      .badge-new {
+        flex: 0 0 auto;
+        min-width: 38px;
+        height: 18px;
+        padding: 0 5px;
+        font-size: 8px;
+        letter-spacing: .4px;
+      }
+
+      .title {
+        margin: 0 0 5px;
+        font-size: 14px;
+        line-height: 1.2;
+        font-weight: 700;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .stats {
+        font-size: 11px;
+        gap: 5px;
+      }
+
+      .actions {
+        grid-area: actions;
+        display: flex;
+        flex-direction: column;
+        width: 88px;
+        min-width: 0;
+        gap: 7px;
+      }
+
+      .btn {
+        min-height: 34px;
+        padding: 6px 5px;
+        font-size: 10px;
+        line-height: 1.1;
+        white-space: nowrap;
+        border-radius: 999px;
+      }
     }
   </style>
 </head>
@@ -360,7 +439,7 @@
   </header>
 
   <div class="site-banner-wrap">
-    <img class="site-banner" src="images/site-banner.jpg?v=20260721-banner-layout-final" alt="噩盡島首頁主視覺">
+    <img class="site-banner" src="images/site-banner.jpg?v=20260721-mobile-row-compact" alt="噩盡島首頁主視覺">
   </div>
 
   <main class="wrap">
@@ -370,7 +449,7 @@
     </div>
   </main>
 
-  <script src="data.js?v=20260721-banner-layout-final"></script>
+  <script src="data.js?v=20260721-mobile-row-compact"></script>
   <script>
     window.addEventListener('load', () => {
       const chapterList = document.getElementById('chapterList');
@@ -401,7 +480,7 @@
         const isNew = Number(chapter.number) === latestChapterNumber;
 
         const coverHTML = coverPath
-          ? `<img src="${coverPath}?v=20260721-banner-layout-final" alt="第 ${chapter.number} 話封面" loading="lazy" onerror="this.onerror=null;this.src='${pages[0] || ''}?v=20260721-banner-layout-final';">`
+          ? `<img src="${coverPath}?v=20260721-mobile-row-compact" alt="第 ${chapter.number} 話封面" loading="lazy" onerror="this.onerror=null;this.src='${pages[0] || ''}?v=20260721-mobile-row-compact';">`
           : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#888;">無封面</div>`;
 
         const card = document.createElement('article');
