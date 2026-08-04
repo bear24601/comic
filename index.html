@@ -449,7 +449,10 @@
     </div>
   </main>
 
-  <script src="data.js?v=20260721-mobile-row-compact"></script>
+  <!-- 每次開啟首頁都讀取 GitHub Actions 最新產生的 data.js，避免舊快取 -->
+  <script>
+    document.write('<script src="data.js?v=' + Date.now() + '"><\/script>');
+  </script>
   <script>
     window.addEventListener('load', () => {
       const chapterList = document.getElementById('chapterList');
