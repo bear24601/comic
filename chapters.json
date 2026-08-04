@@ -1,6 +1,6 @@
 {
   "siteTitle": "噩盡島",
-  "description": "請選擇話數開始閱讀。",
+  "description": "",
   "chapters": [
     {
       "number": 17,
@@ -46,6 +46,11 @@
       "number": 25,
       "title": "輸給你這丫頭",
       "cover": "images/covers/chapter25.jpg"
+    },
+    {
+      "number": 26,
+      "title": "塔雅・藍多神",
+      "cover": "images/covers/chapter26.jpg"
     }
   ]
 }
