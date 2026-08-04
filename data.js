@@ -1,6 +1,6 @@
 const comicData = {
   "siteTitle": "噩盡島",
-  "description": "請選擇話數開始閱讀。",
+  "description": "",
   "chapters": [
     {
       "number": 17,
@@ -514,6 +514,60 @@ const comicData = {
         "images/chapter25/038.jpg",
         "images/chapter25/039.jpg",
         "images/chapter25/040.jpg"
+      ]
+    },
+    {
+      "number": 26,
+      "title": "塔雅・藍多神",
+      "cover": "images/covers/chapter26.jpg",
+      "pages": [
+        "images/chapter26/001.jpg",
+        "images/chapter26/002.jpg",
+        "images/chapter26/003.jpg",
+        "images/chapter26/004.jpg",
+        "images/chapter26/005.jpg",
+        "images/chapter26/006.jpg",
+        "images/chapter26/007.jpg",
+        "images/chapter26/008.jpg",
+        "images/chapter26/009.jpg",
+        "images/chapter26/010.jpg",
+        "images/chapter26/011.jpg",
+        "images/chapter26/012.jpg",
+        "images/chapter26/013.jpg",
+        "images/chapter26/014.jpg",
+        "images/chapter26/015.jpg",
+        "images/chapter26/016.jpg",
+        "images/chapter26/017.jpg",
+        "images/chapter26/018.jpg",
+        "images/chapter26/019.jpg",
+        "images/chapter26/020.jpg",
+        "images/chapter26/021.jpg",
+        "images/chapter26/022.jpg",
+        "images/chapter26/023.jpg",
+        "images/chapter26/024.jpg",
+        "images/chapter26/025.jpg",
+        "images/chapter26/026.jpg",
+        "images/chapter26/027.jpg",
+        "images/chapter26/028.jpg",
+        "images/chapter26/029.jpg",
+        "images/chapter26/030.jpg",
+        "images/chapter26/031.jpg",
+        "images/chapter26/032.jpg",
+        "images/chapter26/033.jpg",
+        "images/chapter26/034.jpg",
+        "images/chapter26/035.jpg",
+        "images/chapter26/036.jpg",
+        "images/chapter26/037.jpg",
+        "images/chapter26/038.jpg",
+        "images/chapter26/039.jpg",
+        "images/chapter26/040.jpg",
+        "images/chapter26/041.jpg",
+        "images/chapter26/042.jpg",
+        "images/chapter26/043.jpg",
+        "images/chapter26/044.jpg",
+        "images/chapter26/045.jpg",
+        "images/chapter26/046.jpg",
+        "images/chapter26/047.jpg"
       ]
     }
   ]
