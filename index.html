@@ -394,7 +394,10 @@
         }
       }
 
-      comicData.chapters.forEach((chapter, index) => {
+      comicData.chapters
+        .map((chapter, index) => ({ chapter, index }))
+        .sort((a, b) => Number(b.chapter.number) - Number(a.chapter.number))
+        .forEach(({ chapter, index }) => {
         const pages = Array.isArray(chapter.pages) ? chapter.pages : [];
         const pageCount = pages.length;
         const progressKey = `comic-progress-${index}`;
