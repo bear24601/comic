@@ -682,6 +682,18 @@ const comicData = {
         "images/chapter28/056.jpg",
         "images/chapter28/057.jpg"
       ]
+    },
+    {
+      "number": 29,
+      "title": "你不是妖怪吧？",
+      "cover": "images/covers/chapter29.jpg",
+      "pages": []
+    },
+    {
+      "number": 30,
+      "title": "也許我會飛",
+      "cover": "images/covers/chapter30.jpg",
+      "pages": []
     }
   ]
 };
