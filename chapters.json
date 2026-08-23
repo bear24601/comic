@@ -61,6 +61,16 @@
       "number": 28,
       "title": "請你救救我",
       "cover": "images/covers/chapter28.jpg"
+    },
+    {
+      "number": 29,
+      "title": "你不是妖怪吧？",
+      "cover": "images/covers/chapter29.jpg"
+    },
+    {
+      "number": 30,
+      "title": "也許我會飛",
+      "cover": "images/covers/chapter30.jpg"
     }
   ]
 }
