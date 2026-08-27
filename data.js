@@ -801,6 +801,12 @@ const comicData = {
         "images/chapter30/051.jpg",
         "images/chapter30/052.jpg"
       ]
+    },
+    {
+      "number": 31,
+      "title": "不就是砍人而已嗎？",
+      "cover": "images/covers/chapter31.jpg",
+      "pages": []
     }
   ]
 };
