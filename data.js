@@ -857,6 +857,12 @@ const comicData = {
         "images/chapter31/048.jpg",
         "images/chapter31/049.jpg"
       ]
+    },
+    {
+      "number": 32,
+      "title": "別留活口就沒人報復",
+      "cover": "images/covers/chapter32.jpg",
+      "pages": []
     }
   ]
 };
